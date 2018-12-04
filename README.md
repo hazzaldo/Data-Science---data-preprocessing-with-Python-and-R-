@@ -1,0 +1,3 @@
+# Data-Science - data preprocessing with (Python and R)
+I created this project to demonstrate a preliminary stage that a Data Scientist goes through, which is preprocessing (prepping) the dataset given (in this example in the Data.csv file). 
+A number of processes are applied to the dataset, such as identifying the two main sets of data: Matrix of features (independant variables) and Dependant Variable Vector (or dependant variables), fixing missing data (using mean calculation), Encoding Categorical Data, Spilitting Dataset into Training set and Test set and Feature Scaling. This is done in both Python and R language. The end goal is to have a dataset that is ready for Machine Learning models to be applied to it. 
