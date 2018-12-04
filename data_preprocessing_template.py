@@ -100,3 +100,34 @@ X = onehotencoder.fit_transform(X).toarray()
 # LabelEncode it. No need for OneHotEncode. 
 labelencoder_y = LabelEncoder()
 y = labelencoder_y.fit_transform(y)
+
+
+# Splitting the dataset into a Training set and a Test set
+# ========================================================
+from sklearn.model_selection import train_test_split
+# X_train is the training part of the Matrix Of Features
+# X_test is the test part of the Matrix Of Features
+# y_train is the training part of the Dependant Variable Vector (that is associated to X_train, that means that we have the same indices for both with the same entries)
+# y_test is the test part of the Dependant Variable Vector (associate to X_test)
+# 1st param is the X and y matrices. 2nd param is the size of the test dataset.
+# A good size for the test data would be between 20% to 30% of the entire 
+# dataset. In this case we specified 20% (0.2).
+# In our case we have 10 entries (or 10 observations) in our dataset, meaning
+# 2 observations will be test data and the remaining are training data.
+# 3rd param is just random number state generator. If you want the same result 
+# as say another data-scientist or analyst, who's also training and testing the
+# the data so that you can both compare and make sure the ML model outputs 
+# the same consist result given the same input data, then you can both put the
+# same number. In our case we simply chose 0. 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0) 
+
+
+
+
+
+
+
+
+
+
+

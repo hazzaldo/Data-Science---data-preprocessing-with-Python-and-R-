@@ -4,10 +4,12 @@
 dataset = read.csv('Data.csv')
 
 # Creating 'Matrix Of Features' and 'Dependant Variable Vector'.
+#===============================================================
 # Unlike Python, in R langauge, we don't need to make a 
 # a distinction between the two matrices (i.e. Matrix Of Features' and 'Dependant Variable Vector').
 
 # Taking care of missing data
+#==============================
 # the $ sign allows us to reference the column in the matrix
 # ifelse() function takes 1st param which is the condition, 2nd param the value if the 
 # condition is true, and 3rd param is the value if the condition is false. 
@@ -28,6 +30,7 @@ dataset$Salary = ifelse(is.na(dataset$Salary),
                      dataset$Salary)
 
 # Encoding categoral data 
+#=========================
 # In R we factors to encode category data. 
 # the factor takes param 1 as the column, param 2 as all the values in the column,
 # and param 3, the encode label for each value respectively. 
@@ -39,3 +42,29 @@ dataset$Country = factor(dataset$Country,
 dataset$Purchased = factor(dataset$Purchased, 
                          levels = c('No', 'Yes'),
                          labels = c(0, 1))
+
+# Splitting the dataset into the Training set and Test set
+#===========================================================
+# the line below is how to install a new package in R that is not included in the existing
+# list of packages. One installed, you can comment out the line as we won't need to 
+# exectue it again.
+# install.packages('caTools')
+# the line below is how to include a library in your code. There's 2 ways. Either tick it
+# from the list of packages in the Packages tab. Or you can use the line below instead.
+library(caTools)
+# the line below is the same as the random_set function in python.
+set.seed(123)
+# splitting the data into training and test set:
+# Unlike in python, in R we only need to input the Y (or dependant variable) matrix to
+# the split function.
+# Unlike python, here in R the SplitRatio of dataset is aimed at the Training set (not the test set). 
+# So in this case we specify 80% (0.8). 
+# The return value will be either true or false for each entry (or observation). 
+# True if the observation is chosen to go to the Training set and false if it's chosen
+# for the Test set
+split = sample.split(dataset$Purchased, SplitRatio = 0.8)
+# create the training set. As the split is already created with TRUE for training set,
+# and FALSE for test set, we simply assign these 2 datasets to variable as per below.
+training_set = subset(dataset, split == TRUE)
+# create the test set
+test_set = subset(dataset, split == FALSE)
