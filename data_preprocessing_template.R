@@ -68,3 +68,18 @@ split = sample.split(dataset$Purchased, SplitRatio = 0.8)
 training_set = subset(dataset, split == TRUE)
 # create the test set
 test_set = subset(dataset, split == FALSE)
+
+
+# Feature Scaling 
+# Note Country and Purchased columns are factored in R, which is not the same as
+# one-hot-encoding applied to categorical data in python. Even though in the 
+# dataset it shows numbers in those columns, but in fact a Factor in R
+# is not a numerical data. Therefore to scale the dataset directly in R in our case
+# will throw an error, because not all data are numerical. In this case we need
+# to exclude categories from the feature scaling. Therefore we simply include 
+# the columns with the numerical values (i.e. Age and Salary, and exclued Country and Purchased).
+# We do this simply by specifying training_set[, 2:3], which is column 2 and 3. 
+# Remember R index count start from 1 (unlike python which starts at 0). Same applies
+# to the test_set.
+training_set[, 2:3] = scale(training_set[, 2:3])
+test_set[, 2:3] = scale(test_set[, 2:3]) 

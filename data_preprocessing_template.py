@@ -122,7 +122,25 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0) 
 
 
-
+# Feature Scaling 
+from sklearn.preprocessing import standardScaler
+sc_X = StandardScaler()
+# scaling the training data. For traning dataset, you have to fit to the 
+# StandardScaler object and then transform it. The same will not apply to the 
+# test dataset, because we will only transform the test dataset.
+# In terms of scaling the dummy data (in this case for the country column), 
+# people are divided on whether they should be scaled or not. The real answer
+# is it depends on the context. You can scale the dummy data so that you can
+# find patterns/correlation as with the rest of the other datasets.
+# However, you will lose one-hot-encoding and hence interpretation to the countries categories. 
+# So it's based on the result you want.
+# It won't break your model if you don't scale the dummy variables, because 
+# they will be actually on the same scale as our future scaled variables, based
+# on the scaling that we will do with the goal of achieving a variation of -1
+# to 1. So in our case we will scale the dummy data as well.
+X_train = sc_X.fit_transform(X_train)
+# Scaling test dataset. As mentioned only transform, no fit is required.
+X_test = sc_X.transform(X_test)
 
 
 
